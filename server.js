@@ -9,19 +9,23 @@ const app = express();
 // ✅ Apply CORS middleware BEFORE routes
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://insta-sigma-seven.vercel.app"
+  "https://insta-sigma-seven.vercel.app",
+  "https://insta-ac4c61tjo-vardhanchittaluri1122s-projects.vercel.app"
 ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS not allowed from this origin: " + origin));
-    }
-  },
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed from this origin: " + origin));
+      }
+    },
+    credentials: true
+  })
+);
+
 
 
 app.use(cookieParser());
