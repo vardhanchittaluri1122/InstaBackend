@@ -11,12 +11,13 @@ Route.post("/", async (req, res) => {
       return res.status(401).json({ userlogincheck: false });
     }
   const token=jwt.sign({password:loginquery.password,username:loginquery.username},process.env.SECRET,{expiresIn:"1h"});
-     res.cookie("token",token,{
-      httpOnly:true,
-      secure:true,
-      sameSite:"Lax",
-      maxAge:24*60*60*1000
-     })
+    res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None", // <- must be 'None' for cross-site cookies
+  maxAge: 24 * 60 * 60 * 1000
+});
+
      res.json({message:"ok.."});
   }catch (error) {
     console.log("❌ Login check error:", error);
@@ -27,11 +28,12 @@ Route.get("/",verify,(req,res)=>{
  res.json({ authenticated: true, user: req.user });
 });
 Route.post("/logout", (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: true,
-    sameSite: "Lax"
-  });
+res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None"
+});
+
   res.json({ message: "Logged out successfully" });
   console.log("ok");
 });
