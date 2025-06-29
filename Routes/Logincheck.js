@@ -29,7 +29,7 @@ Route.get("/",verify,(req,res)=>{
 Route.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false,
+    secure: true,
     sameSite: "Lax"
   });
   res.json({ message: "Logged out successfully" });
