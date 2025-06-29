@@ -33,6 +33,7 @@ Route.post("/logout", (req, res) => {
     sameSite: "Lax"
   });
   res.json({ message: "Logged out successfully" });
+  console.log("ok");
 });
 
 module.exports = Route;
